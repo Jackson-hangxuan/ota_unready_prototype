@@ -49,14 +49,20 @@ class OTAHandler(BaseHandler):
             port = int(server_config.get("port", 8000))
             local_ip = get_local_ip()
 
+            # 固件下载地址（从独立的固件服务器获取）
+            firmware_url = f"http://{local_ip}:8003/xiaozhi.bin"
+            
+            # 固件版本号（服务器端的固件版本）
+            firmware_version = "1.7.6"
+            
             return_json = {
                 "server_time": {
                     "timestamp": int(round(time.time() * 1000)),
                     "timezone_offset": server_config.get("timezone_offset", 8) * 60,
                 },
                 "firmware": {
-                    "version": data_json["application"].get("version", "1.0.0"),
-                    "url": "",
+                    "version": firmware_version,
+                    "url": firmware_url,
                 },
                 "websocket": {
                     "url": self._get_websocket_url(local_ip, port),
