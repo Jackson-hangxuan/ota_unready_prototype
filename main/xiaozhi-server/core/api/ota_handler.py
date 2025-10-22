@@ -50,7 +50,7 @@ class OTAHandler(BaseHandler):
             local_ip = get_local_ip()
 
             # 固件下载地址（从独立的固件服务器获取）
-            firmware_url = f"http://{local_ip}:8003/xiaozhi.bin"
+            firmware_url = "https://gitee.com/xie-hangxuan/ota_addr/raw/master/xiaozhi.bin"
             
             # 固件版本号（服务器端的固件版本）
             firmware_version = "1.7.6"
