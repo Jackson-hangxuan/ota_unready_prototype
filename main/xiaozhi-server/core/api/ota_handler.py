@@ -53,7 +53,7 @@ class OTAHandler(BaseHandler):
             firmware_url = "https://gitee.com/xie-hangxuan/ota_addr/raw/master/xiaozhi.bin"
             
             # 固件版本号（服务器端的固件版本）
-            firmware_version = "1.7.6"
+            firmware_version = "1.7.5"
             
             return_json = {
                 "server_time": {
@@ -68,6 +68,22 @@ class OTAHandler(BaseHandler):
                     "url": self._get_websocket_url(local_ip, port),
                 },
             }
+
+            return_json["mqtt"] = {
+                "endpoint":"192.168.5.17:1883",
+                "publish_topic": f"#"
+            }
+
+
+            # Uncomment to add MQTT configuration
+            # return_json["mqtt"] = {
+            #     "endpoint": "192.168.189.187:1883",
+            #     "client_id": device_id,
+            #     "username": "mqtt_user",
+            #     "password": "mqtt_password",
+            #     "keepalive": 120,
+            #     "publish_topic": f"device/{device_id}/topic"
+            # }
             response = web.Response(
                 text=json.dumps(return_json, separators=(",", ":")),
                 content_type="application/json",
